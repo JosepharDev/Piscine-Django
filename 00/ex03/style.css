@@ -37,7 +37,6 @@ h2 {
 progress:not(value) {
 	/* Add your styles here. As part of this walkthrough we will focus only on determinate progress bars. */
 }
-
 /* Styling the determinate progress element */
 
 progress[value] {

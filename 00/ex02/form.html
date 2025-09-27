@@ -2,62 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Contact Form</title>
 </head>
 <body>
   <h1>Contact Information</h1>
 
   <form id="contactForm" name="contactForm" autocomplete="on">
-    <div>
+    <section>
       <label for="firstname">Firstname:</label>
       <input type="text" id="firstname" name="firstname" required>
-    </div>
+    </section>
 
-    <div>
+    <section>
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
-    </div>
+    </section>
 
-    <div>
+    <section>
       <label for="age">Age:</label>
       <input type="number" id="age" name="age" min="0" max="150" step="1" required>
-    </div>
+    </section>
 
-    <div>
+    <section>
       <label for="phone">Phone:</label>
       <input type="tel" id="phone" name="phone" placeholder="+212..." required>
-    </div>
+    </section>
 
-    <div>
+    <section>
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
-    </div>
+    </section>
 
-    <div>
+    <section>
       <input type="checkbox" id="student" name="student" value="yes">
       <label for="student">Student at 42?</label>
-    </div>
+    </section>
 
     <fieldset>
       <legend>Gender:</legend>
-      <div>
+      <section>
         <input type="radio" id="gender_male" name="gender" value="Male" required>
         <label for="gender_male">Male</label>
-      </div>
-      <div>
+      </section>
+      <section>
         <input type="radio" id="gender_female" name="gender" value="Female">
         <label for="gender_female">Female</label>
-      </div>
-      <div>
+      </section>
+      <section>
         <input type="radio" id="gender_other" name="gender" value="Other">
         <label for="gender_other">Other</label>
-      </div>
+      </section>
     </fieldset>
 
-    <div>
+    <section>
       <button type="button" onclick="displayFormContents()">Submit</button>
-    </div>
+    </section>
   </form>
 
   <script src="popup.js"></script>
