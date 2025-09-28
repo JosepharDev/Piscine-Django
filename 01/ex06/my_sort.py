@@ -23,7 +23,8 @@ def my_sort():
         'Thompson' : '1949',
         'Burton' : '1939',
         }
-
+    tup = sorted([(key, item) for key, item in d.items()], key=lambda list: (list[1], list[0]))
+    [print(item[0]) for item in tup]
 
 if __name__ == "__main__":
     my_sort()
