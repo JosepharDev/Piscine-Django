@@ -1,5 +1,4 @@
 #!/bin/python3
-
 import sys
 
 
@@ -40,7 +39,6 @@ def generate_html(periodic):
             </ul>
         </td>
         '''
-    
     body_construct = "<tr>"
     position = 0
     for item in periodic:
@@ -62,7 +60,6 @@ def generate_html(periodic):
     f.close()
 
 
-
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         try:
@@ -73,7 +70,8 @@ if __name__ == "__main__":
                 for line in file:
                     print(line)
                     tmp = line.split("=")
-                    value = dict((value.strip().split(":") for value in tmp[1].split(", ")))
+                    value = dict((value.strip().split(":")
+                                  for value in tmp[1].split(", ")))
                     value["name"] = tmp[0].strip()
                     res.append(value)
             generate_html(res)
