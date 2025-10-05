@@ -1,5 +1,4 @@
 #!/bin/python3
-
 import sys
 
 
@@ -9,12 +8,13 @@ def dict_get_key_from_value(dct, value):
             return key
     return None
 
+
 def state(name):
     states = {
-        "Oregon" : "OR",
-        "Alabama" : "AL",
+        "Oregon": "OR",
+        "Alabama": "AL",
         "New Jersey": "NJ",
-        "Colorado" : "CO"
+        "Colorado": "CO"
         }
     capital_cities = {
         "OR": "Salem",
@@ -27,7 +27,6 @@ def state(name):
         print("Unknown capital city")
         sys.exit(1)
     print(dict_get_key_from_value(states, tmp))
-
 
 
 if __name__ == "__main__":

@@ -1,11 +1,13 @@
 #!/bin/python3
 import sys
+
+
 def capital_city(name):
     states = {
-        "Oregon" : "OR",
-        "Alabama" : "AL",
+        "Oregon": "OR",
+        "Alabama": "AL",
         "New Jersey": "NJ",
-        "Colorado" : "CO"
+        "Colorado": "CO"
         }
     capital_cities = {
         "OR": "Salem",
@@ -18,7 +20,6 @@ def capital_city(name):
         print("Unknown state")
         sys.exit(1)
     print(capital_cities.get(tmp))
-
 
 
 if __name__ == "__main__":
