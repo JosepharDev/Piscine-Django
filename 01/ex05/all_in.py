@@ -41,10 +41,10 @@ def all_in(names):
         }
     items = clean_dict(names)
     for item in items:
-        key = dict_get_key_from_value(capital_cities, item)
         value = dict_get_value_from_key(states, item)
+        key = dict_get_key_from_value(capital_cities, item)
         if value:
-            print(capital_cities.get(value), "is the state of",
+            print(capital_cities.get(value), "is the capital of",
                   dict_get_key_from_value(states, value))
         elif key:
             print(capital_cities.get(key), "is the capital of",
