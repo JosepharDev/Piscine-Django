@@ -1,5 +1,4 @@
 #!/bin/python3
-import sys
 
 
 def generate_html(periodic):
@@ -69,7 +68,7 @@ if __name__ == "__main__":
             for line in file:
                 tmp = line.split("=")
                 value = dict((value.strip().split(":")
-                                for value in tmp[1].split(", ")))
+                             for value in tmp[1].split(", ")))
                 value["name"] = tmp[0].strip()
                 res.append(value)
         generate_html(res)
