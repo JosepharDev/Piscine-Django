@@ -1,5 +1,4 @@
 #!/bin/python3
-import sys
 
 
 def generate_html(periodic):
@@ -61,19 +60,18 @@ def generate_html(periodic):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 2:
-        try:
-            tmp = []
-            value = {}
-            res = []
-            with open("periodic_table.txt", "r") as file:
-                for line in file:
-                    print(line)
-                    tmp = line.split("=")
-                    value = dict((value.strip().split(":")
-                                  for value in tmp[1].split(", ")))
-                    value["name"] = tmp[0].strip()
-                    res.append(value)
-            generate_html(res)
-        except Exception as e:
-            print(f"Error {e}")
+    try:
+        tmp = []
+        value = {}
+        res = []
+        file = open("periodic_table.txt", "r")
+        for line in file:
+            tmp = line.split("=")
+            value = dict((value.strip().split(":")
+                         for value in tmp[1].split(", ")))
+            value["name"] = tmp[0].strip()
+            res.append(value)
+        file.close()
+        generate_html(res)
+    except Exception as e:
+        print(f"Error {e}")
