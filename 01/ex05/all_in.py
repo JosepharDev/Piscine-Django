@@ -2,14 +2,14 @@
 import sys
 
 
-def dict_get_key_from_value(dct, value):
+def dict_get_key_using_value(dct, value):
     for key, item in dct.items():
         if item.upper() == value.upper():
             return key
     return None
 
 
-def dict_get_value_from_key(dct, key):
+def dict_get_value_using_key(dct, key):
     for item, value in dct.items():
         if item.upper() == key.upper():
             return value
@@ -41,14 +41,14 @@ def all_in(names):
         }
     items = clean_dict(names)
     for item in items:
-        value = dict_get_value_from_key(states, item)
-        key = dict_get_key_from_value(capital_cities, item)
+        value = dict_get_value_using_key(states, item)
+        key = dict_get_key_using_value(capital_cities, item)
         if value:
             print(capital_cities.get(value), "is the capital of",
-                  dict_get_key_from_value(states, value))
+                  dict_get_key_using_value(states, value))
         elif key:
             print(capital_cities.get(key), "is the capital of",
-                  dict_get_key_from_value(states, key))
+                  dict_get_key_using_value(states, key))
         else:
             print(item, "is neither a capital city nor a state")
 
