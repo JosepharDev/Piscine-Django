@@ -1,14 +1,15 @@
-from path import Path
+import sys
 
+sys.path.insert(0, './local_lib')
+from path import Path
 
 def main():
     try:
-        Path.makedirs('something')
+        Path('directory').mkdir_p()
     except FileExistsError as e:
         print(e)
-    Path.touch('something/something')
-    f = Path('something/something')
-    f.write_lines(['hello', 'world!'])
+    f = Path('directory/file')
+    f.write_lines(['hello', 'ggg!'])
     print(f.read_text())
 
 
