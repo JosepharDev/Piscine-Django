@@ -1,0 +1,5 @@
+FROM postgres
+
+ENV POSTGRES_DB=djangotraining
+ENV POSTGRES_USER=djangouser
+ENV POSTGRES_PASSWORD=secret
