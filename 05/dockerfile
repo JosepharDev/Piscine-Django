@@ -1,5 +1,8 @@
-FROM postgres
+FROM postgres:latest
 
 ENV POSTGRES_DB=djangotraining
 ENV POSTGRES_USER=djangouser
 ENV POSTGRES_PASSWORD=secret
+
+
+# docker run -it -p 5432:5432 postgres

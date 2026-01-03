@@ -15,6 +15,6 @@ def init(request):
         nopening_crawl text not null,
         director varchar(32) not null,
         producer varchar(128) not null,
-        release_data date not null);""")
+        release_date date not null);""")
     conn.commit()
     return HttpResponse("OK")
