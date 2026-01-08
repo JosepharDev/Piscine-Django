@@ -1,7 +1,6 @@
 from django.shortcuts import render
-import psycopg2
 from django.http import HttpResponse
-
+# Create your views here.
 def init(request):
     try:
         conn = psycopg2.connect(dbname="djangotraining", 
@@ -10,7 +9,7 @@ def init(request):
                         host="localhost",
                         port="5432")
         cur = conn.cursor()
-        cur.execute("""CREATE TABLE if not exists ex02_movies 
+        cur.execute("""CREATE TABLE if not exists ex04_movies 
             (title varchar(64) unique not null,
             episode_nb serial primary key,
             nopening_crawl text,
@@ -23,7 +22,6 @@ def init(request):
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
-
 
 def populate(request):
     data = [
@@ -42,7 +40,7 @@ def populate(request):
                             host="localhost",
                             port="5432")
         cur = conn.cursor()
-        cur.executemany("insert into ex02_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)", data)
+        cur.executemany("insert into ex04_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)", data)
         conn.commit()
         return HttpResponse("OK")
 
@@ -56,24 +54,26 @@ def populate(request):
             conn.close()
             
 def display(request):
-    try:
+    try: 
         conn = psycopg2.connect(dbname="djangotraining", 
-                        user="djangouser",
-                        password="secret",
-                        host="localhost",
-                        port="5432")
+                            user="djangouser",
+                            password="secret",
+                            host="localhost",
+                            port="5432")
         cur = conn.cursor()
-        cur.execute("select * from ex02_movies")
+        cur.execute("select * from ex04_movies")
         data = cur.fetchall()
         if not data:
             return HttpResponse("No data available")
-        return render(request, "index.html", {"data": data})
+        return render(request, "ex04_index.html", {"data":data})
     except Exception as e:
         return HttpResponse(f"Error: {e}")
-    
+
     finally:
         if cur:
             cur.close()
         if conn:
             conn.close()
-        
+            
+def remove(request):
+    

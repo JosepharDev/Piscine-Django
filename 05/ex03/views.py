@@ -14,8 +14,6 @@ def populate(request):
             Movies(episode_nb=7, title="The Force Awakens", director=" J. J. Abrams", producer="Kathleen Kennedy, J. J. Abrams, Bryan Burk", release_date="2015-12-11")
         ]
         objs = Movies.objects.bulk_create(movies)
-        for obj in objs:
-            obj.save()
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
@@ -26,6 +24,6 @@ def display(request):
         print(data)
         if not data:
             return HttpResponse("No data available")
-        # return render(request, "index.html", {"data": data})
+        return render(request, "index_d.html", {"data": data})
     except Exception as e:
-        return HttpResponse(f"Error: {e}")
+        return HttpResponse(f"Error dd: {e}")

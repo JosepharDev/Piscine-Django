@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>episode_nb</th>
+                <th>title</th>
+                <th>opening_crawl</th>
+                <th>director</th>
+                <th>producer</th>
+                <th>release_date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.episode_nb }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.opening_crawl }}</td>
+                <td>{{ item.director }}</td>
+                <td>{{ item.producer }}</td>
+                <td>{{ item.release_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
