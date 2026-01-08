@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import psycopg2
 # Create your views here.
 def init(request):
     try:
@@ -76,4 +77,33 @@ def display(request):
             conn.close()
             
 def remove(request):
-    
+    try: 
+        conn = psycopg2.connect(dbname="djangotraining", 
+                            user="djangouser",
+                            password="secret",
+                            host="localhost",
+                            port="5432")
+        cur = conn.cursor()
+        if request.method == "POST" and "remove" in request.POST:
+            title = request.POST.get("title")
+            if title:
+                cur.execute(
+                    "DELETE FROM ex04_movies WHERE title = %s;",
+                    (title,)
+                )
+                conn.commit()
+        cur.execute("SELECT title FROM ex04_movies;")
+        movies = cur.fetchall()
+
+        if not movies:
+            return HttpResponse("No data available")
+        return render(request, 'ex04_remove.html', {"movies": movies})
+
+    except Exception as e:
+        return HttpResponse(f"Error: {e}")
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
