@@ -9,7 +9,7 @@ def test_text():
     # What is Text?
     assert isinstance(Text(), str)
     # Default behaviour :
-  assert str(Text()) == ''
+    assert str(Text()) == ''
     # With an argument :
     assert str(Text('')) == ''
     assert str(Text('foo')) == 'foo'

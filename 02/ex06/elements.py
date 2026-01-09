@@ -26,42 +26,52 @@ class Th(Elem):
         super().__init__(tag="th", content=content, attr=attr, tag_type="double")
 class Tr(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="tr", content=content, tag_type="double")
+        super().__init__(tag="tr", content=content, attr=attr, tag_type="double")
 class Td(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="td", content=content, tag_type="double")
+        super().__init__(tag="td", content=content, attr=attr, tag_type="double")
 class Ul(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="ul", content=content, tag_type="double")
+        super().__init__(tag="ul", content=content, attr=attr, tag_type="double")
 class Ol(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="ol", content=content, tag_type="double")
+        super().__init__(tag="ol", content=content, attr=attr, tag_type="double")
 class Li(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="li", content=content, tag_type="double")
+        super().__init__(tag="li", content=content, attr=attr, tag_type="double")
 class H1(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="h1", content=content, tag_type="double")
+        super().__init__(tag="h1", content=content, attr=attr, tag_type="double")
 class H2(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="h2", content=content, tag_type="double")
+        super().__init__(tag="h2", content=content, attr=attr, tag_type="double")
 class P(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="p", content=content, tag_type="double")
+        super().__init__(tag="p", content=content, attr=attr, tag_type="double")
 class Div(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="div", content=content, tag_type="double")
+        super().__init__(tag="div", content=content, attr=attr, tag_type="double")
 class Span(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="span", content=content, tag_type="double")
+        super().__init__(tag="span", content=content, attr=attr, tag_type="double")
 class Hr(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="hr", content=content, tag_type="simple")
+        super().__init__(tag="hr", content=content, attr=attr, tag_type="simple")
 class Br(Elem):
     def __init__(self, content=None, attr={}):
-        super().__init__(tag="br", content=content, tag_type="simple")
+        super().__init__(tag="br", content=content, attr=attr, tag_type="simple")
 
 from elem import Text
 
-if __name__ == "__main__":
-    print( Html( [Head([Title(), Meta()]), Body([H1(content=Text("hello")), Img()])] ) )
+if __name__ == '__main__':
+    page = Html([
+        Head(
+            Title(Text('"Oh no, not again!"'))
+        ),
+        Body([
+            H1(Text('"Oh no, not again!"')),
+            Img(attr={'src': 'http://i.imgur.com/pfp3x.jpg', 'title': 'The Source'})
+        ])
+    ])
+
+    print(page)

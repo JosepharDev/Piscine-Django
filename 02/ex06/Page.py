@@ -30,8 +30,6 @@ class Page:
         # Rule 1: Allowed Types
         if not isinstance(elem, (Html, Head, Body, Title, Meta, Img, Table, Th, Tr, Td, Ul, Ol, Li, H1, H2, P, Div, Span, Hr, Br, Text)):
             return False
-
-        # --- Specific Structural Rules ---
         
         # Rule 2: Html -> [Head, Body]
         if isinstance(elem, Html):
@@ -53,14 +51,14 @@ class Page:
                 if not isinstance(child, (H1, H2, Div, Table, Ul, Ol, Span, Text)):
                     return False
                     
-        # Rule 5: Title, H1, H2, Li, Th, Td -> [Text]
+        # Rule 5: Title, H1, H2, Li, Th, Td -> [Text] (should contain 1 Text)
         elif isinstance(elem, (Title, H1, H2, Li, Th, Td)):
             if len(elem.content) != 1:
                 return False
             if not isinstance(elem.content[0], Text):
                 return False
                 
-        # Rule 6: P -> [Text] (Multiple text elements allowed, but ONLY Text)
+        # Rule 6: P -> [Text]
         elif isinstance(elem, P):
             for child in elem.content:
                 if not isinstance(child, Text):
@@ -80,7 +78,7 @@ class Page:
                 if not isinstance(child, Li):
                     return False
                     
-        # Rule 9: Tr -> [Th or Td] (at least one, mutually exclusive)
+        # Rule 9: Tr -> [Th or Td]
         elif isinstance(elem, Tr):
             if len(elem.content) == 0:
                 return False
@@ -102,15 +100,12 @@ class Page:
                     return False
 
         # --- Recursion ---
-        # If it's a Text node or a simple tag, it has no children to check.
         if isinstance(elem, (Text, Meta, Img, Hr, Br)):
             return True
 
-        # Check all children recursively
         return all(self.__recursive_check(child) for child in elem.content)
 
 if __name__ == "__main__":
-    # Test 1: Invalid Structure (Html has Body then Head) - Should be False
     print("Test 1 (Invalid):")
     head = Page(Html([Body(), Head()]))
     print(head.is_valid()) 

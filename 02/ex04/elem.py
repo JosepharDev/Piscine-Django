@@ -17,8 +17,9 @@ class Text(str):
             .replace('<', '&lt;')
             .replace('>', '&gt;')
             .replace('"', '&quot;')
+            .replace('\n', '\n<br />\n')
         )
-        return escaped_str.replace('\n', '\n<br />\n')
+        return escaped_str
 
 class Elem:
     """
@@ -67,8 +68,7 @@ class Elem:
         """
         result = ''
         for pair in sorted(self.attr.items()):
-            escaped_value = str(pair[1]).replace('"', '&quot;')
-            result += ' ' + str(pair[0]) + '="' + escaped_value + '"'
+            result += ' ' + str(pair[0]) + '="' + str(pair[1]) + '"'
         return result
 
     def __make_content(self):
@@ -78,21 +78,17 @@ class Elem:
 
         if len(self.content) == 0:
             return ''
-        
-        needs_indent = any(isinstance(item, Elem) for item in self.content)
-        if not needs_indent:
-            return "".join(str(elem) for elem in self.content)
-        
+    
         result = '\n'
         for elem in self.content:
             elem_str = str(elem)
             indented_str = "  "+ elem_str.replace('\n', '\n  ')
             result += indented_str + '\n'
-        return result.rstrip(' ').rstrip('\n')
+        return result
 
     def add_content(self, content):
         if not Elem.check_type(content):
-            raise Elem.ValidationError
+            raise Elem.ValidationError("invalid type")
         if self.tag_type == 'simple':
             raise Elem.ValidationError("Cannot add content to a simple (self-closing) tag.")
         
