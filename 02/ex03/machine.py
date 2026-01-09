@@ -7,8 +7,10 @@ class CoffeeMachine:
     class EmptyCup(HotBeverage):
         name = "empty cup"
         price = 0.90
+        
         def description(self):
             return "An empty cup?! Gimme my money back!"
+    
     class BrokenMachineException(Exception):
         def __init__(self):
             super().__init__("This coffee machine has to be repaired.")
@@ -16,6 +18,7 @@ class CoffeeMachine:
     def repair(self):
         self.served_count = 0
         print("\n[Repairing Machine... All systems green.]\n")
+
     def serve(self, drink_class):
         if self.served_count >= 10:
             raise self.BrokenMachineException()

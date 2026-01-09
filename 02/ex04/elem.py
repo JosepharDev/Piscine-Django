@@ -1,10 +1,5 @@
 #!/usr/bin/python3
 
-# find what to do with new line before last tag
-# <html>
-# <head></head>
-# <body></body></html>
-
 class Text(str):
     """
     A Text class to represent a text you could use with your HTML elements.
@@ -23,7 +18,7 @@ class Text(str):
             .replace('>', '&gt;')
             .replace('"', '&quot;')
         )
-        return escaped_str.replace('\n', '\n<br />\n').rstrip('\n<br />\n').lstrip('\n')
+        return escaped_str.replace('\n', '\n<br />\n')
 
 class Elem:
     """
