@@ -34,12 +34,10 @@ class CoffeeMachine:
 if __name__ == '__main__':
     machine = CoffeeMachine()
     
-    # List of available drink classes to pick from randomly for the test
     menu = [Coffee, Tea, Chocolate, Cappuccino]
 
     print("--- FIRST ROUND OF SERVICE ---")
     try:
-        # Loop intentionally longer than 10 to force a break
         for i in range(12):
             drink_request = random.choice(menu)
             print(f"Requesting: {drink_request.name}...")
