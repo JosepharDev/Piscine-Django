@@ -88,20 +88,16 @@ class WikiWalker:
             title = title_node.text
             print(title)
 
-            # 1. Success Condition
             if title == "Philosophy":
                 print(f"{len(self.visited_pages)} roads from {list(self.visited_pages.values())[0]} to philosophy")
                 sys.exit(0)
 
-            # 2. Infinite Loop Condition
             if title in self.visited_pages.values():
                 print("It leads to an infinite loop !")
                 sys.exit(0)
 
-            # Record visit
             self.visited_pages[current_url] = title
 
-            # 3. Find Next Link
             next_path = self._get_next_link(soup)
             if not next_path:
                 print("It leads to a dead end !")
