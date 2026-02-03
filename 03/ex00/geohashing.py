@@ -1,7 +1,27 @@
-#!/bin/python3
+#!/usr/bin/python3
+
 import sys
 import antigravity
 
-https://geohashing.site/geohashing/The_Algorithm
-https://www.google.com/search?q=geohash+python+without+library&sca_esv=0ccf53d8b4904cec&sxsrf=AE3TifOhuLzLtdcfRZtCeqLI3HynnsLpIA%3A1766073069386&ei=7SJEac2zF5OdkdUPqM-0wAM&oq=geohash+python+without+li&gs_lp=Egxnd3Mtd2l6LXNlcnAiGWdlb2hhc2ggcHl0aG9uIHdpdGhvdXQgbGkqAggAMgUQIRigATIFECEYoAEyBRAhGKABSIYoUNYFWIUYcAF4AJABAJgBfqABgwqqAQMzLjm4AQPIAQD4AQGYAgygAtsJwgIKEAAYsAMY1gQYR8ICBhAAGBYYHsICCBAAGIAEGKIEwgIIEAAYogQYiQXCAgUQABjvBcICBBAhGBXCAgsQABiABBiGAxiKBcICBxAhGKABGArCAgYQIRgVGA3CAgUQIRifBZgDAIgGAZAGCJIHBDEuMTGgB9otsgcEMC4xMbgH1wnCBwYwLjEwLjLIBxqACAA&sclient=gws-wiz-serp
-https://xkcd.com/426/
+
+def main():
+    if (len(sys.argv) == 4):
+        try:
+            latitude = float(sys.argv[1])
+        except:
+            return print("latitude required type: float")
+        try:
+            longitude = float(sys.argv[2])
+        except:
+            return print("longitude required type: float")
+        try:
+            datedow = sys.argv[3].encode('utf-8')
+        except:
+            return print("datedow required type: string")
+        antigravity.geohash(latitude, longitude, datedow)
+    else:
+        print("3 arguments required(latitude, longitude, datedow)")
+
+
+if __name__ == '__main__':
+    main()

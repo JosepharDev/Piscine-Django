@@ -1,9 +1,6 @@
 import requests, json, sys
 from dewiki import from_string
 
-def extra_cleaning(article: str)-> str:
-    pass
-
 def write_to_file(cleaned_article: str, title: str)-> None:
     filename = title.replace(" ", "_") + ".wiki"
     with open(filename, "w", encoding="utf-8") as f:
@@ -23,6 +20,7 @@ def get_correct_name(requested_string: str)-> str:
     }
     try:
         response = requests.get(url=base_url, params=params, headers=HEADERS)
+        print("requested url: ", response.url)
     except requests.RequestException as e:
         print("Unable to connect to wikipedia:  ", e)
         sys.exit(1)
@@ -52,6 +50,7 @@ def get_article(title: str)-> str:
         }
     try:
         response = requests.get(base_url, params=params, headers=HEADERS)
+        print("requested url: ", response.url)
     except requests.exceptions.RequestException as e:
         print("Unable to connect to wikipedia:  ", e)
         sys.exit(1)
@@ -70,6 +69,7 @@ def get_article(title: str)-> str:
     
     wiki_text = page["revisions"][0]["slots"]["main"]["*"]
     clean_text = from_string(wiki_text)
+    return clean_text
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -77,10 +77,5 @@ if __name__ == "__main__":
         sys.exit(1)
     title = get_correct_name(sys.argv[1].strip())
     article = get_article(title)
-    cleaned_article = extra_cleaning(article)
-    write_to_file(cleaned_article, title)
-    print(article)
-
-
-#https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvslots=main&titles=Pain%20au%20chocolat
-#https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=Chocolatine
+    write_to_file(article, title)
+    print(title)

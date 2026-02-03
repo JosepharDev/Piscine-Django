@@ -20,7 +20,7 @@ mkdir -p "$LIB_DIR"
 
 echo "Installing path.py from GitHub..."
 
-# Install path.py (development version)
+# Install path.py
 pip install \
     git+https://github.com/jaraco/path.git \
     --target "$LIB_DIR" \
