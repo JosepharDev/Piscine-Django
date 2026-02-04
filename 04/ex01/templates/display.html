@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ex01: Display process of a static page{% endblock %}
+
+{% block content %}
+<h1>Ex01: Display process of a static page</h1>
+
+<h2>Overview</h2>
+<p>The process of displaying a static web page in Django involves several components working together. Here's the complete flow from receiving a request to sending back a response.</p>
+
+<h2>The Request-Response Cycle</h2>
+
+<h3>1. User Makes a Request</h3>
+<p>When a user enters a URL in their browser or clicks a link, an HTTP request is sent to the Django server. This request contains information such as the URL path, HTTP method (GET, POST, etc.), headers, and any data.</p>
+
+<h3>2. URL Routing</h3>
+<p>Django's URL dispatcher receives the request and examines the URL pattern. It compares the requested URL against the patterns defined in the urls.py file, starting from the root URLconf specified in settings.py. When a match is found, Django calls the associated view function.</p>
+
+<h3>3. View Processing</h3>
+<p>The view function is a Python function that receives the HTTP request object as its first parameter. For a static page, the view typically performs the following actions:</p>
+<ul>
+    <li>Receives the HTTP request object</li>
+    <li>Optionally prepares context data (a dictionary of variables to pass to the template)</li>
+    <li>Calls the render() function with the request, template name, and context</li>
+</ul>
+
+<h3>4. Template Rendering</h3>
+<p>The Django template engine processes the specified template file:</p>
+<ul>
+    <li>Loads the template from the templates directory</li>
+    <li>Parses the template, identifying Django template tags and variables</li>
+    <li>Replaces template variables with values from the context</li>
+    <li>Processes template tags (loops, conditionals, blocks, includes, etc.)</li>
+    <li>Generates the final HTML document</li>
+</ul>
+
+<h3>5. HTTP Response</h3>
+<p>The rendered HTML is wrapped in an HttpResponse object, which includes:</p>
+<ul>
+    <li>The HTML content</li>
+    <li>HTTP status code (200 for success)</li>
+    <li>HTTP headers (content-type, cookies, etc.)</li>
+</ul>
+
+<h3>6. Response Delivery</h3>
+<p>Django's web server sends the HTTP response back to the user's browser through the network. The browser receives the response and renders the HTML, displaying the static page to the user.</p>
+
+<h2>Key Components</h2>
+<ul>
+    <li><strong>urls.py:</strong> Maps URL patterns to view functions</li>
+    <li><strong>views.py:</strong> Contains view functions that process requests</li>
+    <li><strong>templates/:</strong> Directory containing HTML template files</li>
+    <li><strong>Template Engine:</strong> Processes templates and generates HTML</li>
+    <li><strong>settings.py:</strong> Configuration file that specifies project settings</li>
+</ul>
+
+<h2>Example Flow</h2>
+<p>Request: <code>http://localhost:8000/ex01/display/</code></p>
+<ol>
+    <li>Django receives request for <code>/ex01/display/</code></li>
+    <li>Root urls.py routes to ex01.urls</li>
+    <li>ex01/urls.py matches pattern and calls <code>display_page</code> view</li>
+    <li>View function calls <code>render(request, 'display.html')</code></li>
+    <li>Template engine loads and processes display.html</li>
+    <li>HTML is returned as HTTP response</li>
+    <li>Browser displays the page</li>
+</ol>
+{% endblock %}
