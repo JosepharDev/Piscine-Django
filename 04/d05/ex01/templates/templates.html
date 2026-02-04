@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ex01: Template engine{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Ex01: Template engine</h1>
+
+<h2>Django's Default Template Engine</h2>
+<p>Django's template engine is a powerful system for generating HTML dynamically. It's designed to feel comfortable to those used to working with HTML, while providing powerful features for creating dynamic content.</p>
+
+<h2>How the Template Engine Works</h2>
+<p>The Django template engine processes templates in several steps:</p>
+<ol>
+    <li><strong>Loading:</strong> Django locates and loads the template file from the templates directory</li>
+    <li><strong>Parsing:</strong> The template is parsed to identify template tags, variables, and filters</li>
+    <li><strong>Rendering:</strong> Variables are replaced with their values from the context, and template tags are executed</li>
+    <li><strong>Output:</strong> The final HTML document is generated and returned</li>
+</ol>
+
+<h2>Blocks</h2>
+<p>Blocks are used for template inheritance, allowing child templates to override specific sections of a parent template.</p>
+
+<h3>Parent Template (base.html):</h3>
+<pre><code>{% verbatim %}
+<html>
+<head>
+    <title>{% block title %}Default Title{% endblock %}</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
+{% endverbatim %}</code></pre>
+
+<h3>Child Template:</h3>
+<pre><code>{% verbatim %}
+{% extends 'base.html' %}
+
+{% block title %}My Page{% endblock %}
+
+{% block content %}
+    <h1>Hello World!</h1>
+{% endblock %}
+{% endverbatim %}</code></pre>
+
+<p>Blocks allow you to define sections in a base template that can be overridden by child templates, promoting code reuse and maintaining consistency across pages.</p>
+
+<h2>For Loops</h2>
+<p>The <code>{% templatetag openblock %} for ... in {% templatetag closeblock %}</code> tag allows you to iterate over sequences like lists, tuples, or querysets.</p>
+
+<h3>Basic Syntax:</h3>
+<pre><code>{% verbatim %}
+<ul>
+{% for item in items %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% endverbatim %}</code></pre>
+
+<h3>With Empty Clause:</h3>
+<pre><code>{% verbatim %}
+{% for item in items %}
+    <p>{{ item }}</p>
+{% empty %}
+    <p>No items available.</p>
+{% endfor %}
+{% endverbatim %}</code></pre>
+
+<h3>Loop Variables:</h3>
+<p>Django provides special variables inside for loops:</p>
+<ul>
+    <li><code>forloop.counter</code>: Current iteration (1-indexed)</li>
+    <li><code>forloop.counter0</code>: Current iteration (0-indexed)</li>
+    <li><code>forloop.first</code>: True if first iteration</li>
+    <li><code>forloop.last</code>: True if last iteration</li>
+    <li><code>forloop.parentloop</code>: Reference to parent loop in nested loops</li>
+</ul>
+
+<h2>If Control Structures</h2>
+<p>The <code>{% templatetag openblock %} if {% templatetag closeblock %}</code> tag allows conditional rendering of content.</p>
+
+<h3>Basic If Statement:</h3>
+<pre><code>{% verbatim %}
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+{% endif %}
+{% endverbatim %}</code></pre>
+
+<h3>If-Else Statement:</h3>
+<pre><code>{% verbatim %}
+{% if items %}
+    <p>There are items.</p>
+{% else %}
+    <p>No items found.</p>
+{% endif %}
+{% endverbatim %}</code></pre>
+
+<h3>If-Elif-Else Statement:</h3>
+<pre><code>{% verbatim %}
+{% if score >= 90 %}
+    <p>Grade: A</p>
+{% elif score >= 80 %}
+    <p>Grade: B</p>
+{% elif score >= 70 %}
+    <p>Grade: C</p>
+{% else %}
+    <p>Grade: F</p>
+{% endif %}
+{% endverbatim %}</code></pre>
+
+<h3>Logical Operators:</h3>
+<p>You can use <code>and</code>, <code>or</code>, and <code>not</code> operators:</p>
+<pre><code>{% verbatim %}
+{% if user.is_authenticated and user.is_staff %}
+    <p>Admin access granted</p>
+{% endif %}
+{% endverbatim %}</code></pre>
+
+<h2>Displaying Context Variables</h2>
+<p>Variables passed from views to templates through the context can be displayed using double curly braces.</p>
+
+<h3>Basic Variable Display:</h3>
+<pre><code>{% verbatim %}
+<p>Hello, {{ name }}!</p>
+{% endverbatim %}</code></pre>
+
+<h3>Accessing Object Attributes:</h3>
+<pre><code>{% verbatim %}
+<p>{{ user.username }}</p>
+<p>{{ product.price }}</p>
+{% endverbatim %}</code></pre>
+
+<h3>Accessing Dictionary Keys:</h3>
+<pre><code>{% verbatim %}
+<p>{{ data.key }}</p>
+{% endverbatim %}</code></pre>
+
+<h3>Accessing List Items:</h3>
+<pre><code>{% verbatim %}
+<p>{{ items.0 }}</p>
+{% endverbatim %}</code></pre>
+
+<h3>Using Filters:</h3>
+<p>Filters modify variables for display:</p>
+<pre><code>{% verbatim %}
+<p>{{ name|upper }}</p>
+<p>{{ text|truncatewords:30 }}</p>
+<p>{{ price|floatformat:2 }}</p>
+<p>{{ date|date:"Y-m-d" }}</p>
+{% endverbatim %}</code></pre>
+
+<h2>Summary</h2>
+<p>Django's template engine provides a clean separation between presentation and logic, making it easy to create maintainable and reusable templates. The combination of blocks, loops, conditionals, and variable display creates a powerful system for generating dynamic HTML content.</p>
+
+{% endblock %}
