@@ -27,7 +27,6 @@ def generate_shades(color_name, start_value, end_value, steps=50):
 
 def index(request):
     """Display color shades table"""
-    # Generate 50 shades for each color
     colors = {
         'noir': generate_shades('noir', 0, 255, 50),
         'rouge': generate_shades('rouge', 0, 255, 50),
@@ -35,8 +34,6 @@ def index(request):
         'vert': generate_shades('vert', 0, 255, 50)
     }
     
-    # Transpose the colors dict to create rows
-    # Each row will have one shade from each color
     rows = []
     for i in range(50):
         row = {
@@ -52,4 +49,4 @@ def index(request):
         'rows': rows
     }
     
-    return render(request, 'index.html', context)
+    return render(request, 'index_03.html', context)
