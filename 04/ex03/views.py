@@ -36,12 +36,12 @@ def index(request):
     
     rows = []
     for i in range(50):
-        row = {
-            'noir': colors['noir'][i],
-            'rouge': colors['rouge'][i],
-            'bleu': colors['bleu'][i],
-            'vert': colors['vert'][i]
-        }
+        row = [
+            colors['noir'][i],
+            colors['rouge'][i],
+            colors['bleu'][i],
+            colors['vert'][i]
+        ]
         rows.append(row)
     
     context = {

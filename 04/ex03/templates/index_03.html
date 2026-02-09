@@ -54,8 +54,8 @@
             <tbody>
                 {% for row in rows %}
                     <tr>
-                        {% for column in columns %}
-                            <td style="background-color: {{ row|get_item:column }};"></td>
+                        {% for color in row %}
+                            <td style="background-color: {{ color }};"></td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
