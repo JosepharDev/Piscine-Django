@@ -1,5 +1,5 @@
 """
-URL configuration for d06 project.
+URL configuration for d05 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -24,5 +24,8 @@ urlpatterns = [
     path("ex02/", include("ex02.urls")),
     path("ex03/", include("ex03.urls")),
     path("ex04/", include("ex04.urls")),
-    path("ex05/", include("ex05.urls")),   
+    path("ex05/", include("ex05.urls")),
+    path("ex06/", include("ex06.urls")),
+    path("ex07/", include("ex07.urls")),
+
 ]
