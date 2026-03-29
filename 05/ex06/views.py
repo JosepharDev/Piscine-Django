@@ -14,7 +14,7 @@ def init(request):
         cur.execute("""CREATE TABLE if not exists ex06_movies 
             (title varchar(64) unique not null,
             episode_nb serial primary key,
-            nopening_crawl text,
+            opening_crawl text,
             director varchar(32) not null,
             producer varchar(128) not null,
             release_date date not null,
@@ -116,7 +116,7 @@ def update(request):
             
             try:
                 cur.execute(
-                    "UPDATE ex06_movies SET nopening_crawl = %s WHERE title = %s",
+                    "UPDATE ex06_movies SET opening_crawl = %s WHERE title = %s",
                     (new_text, m_title)
                 )
                 conn.commit()

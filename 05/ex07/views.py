@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Movies
 from django.http import HttpResponse
+from .forms import update_op
 # Create your views here.
 
 def populate(request):
@@ -30,4 +31,23 @@ def display(request):
         return HttpResponse("No data available")
 
 def update(request):
-    pass
+    log_message = None
+    try:
+        movies = Movies.objects.all()
+        if not movies.exists():
+            return render(request, 'ex07_update.html', {"log_message": "No data available"})
+    except Exception:
+        return render(request, 'ex07_update.html', {"log_message": "No data available"})
+
+    if request.method == 'POST':
+        form = update_op(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['drop_down']
+            text = form.cleaned_data["text"]
+            row = Movies.objects.get(title=title)
+            row.opening_crawl = text
+            row.save()
+            return redirect("update")
+    else:
+        form = update_op()
+        return render(request, "ex07_update.html", {"form":form, "show_form":True})

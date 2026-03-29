@@ -13,7 +13,7 @@ def init(request):
         cur.execute("""CREATE TABLE if not exists ex00_movies 
             (title varchar(64) unique not null,
             episode_nb serial primary key,
-            nopening_crawl text,
+            opening_crawl text,
             director varchar(32) not null,
             producer varchar(128) not null,
             release_date date not null);""")

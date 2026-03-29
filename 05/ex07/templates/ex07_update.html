@@ -1,0 +1,10 @@
+{% if log_message%}
+{{log_message}}
+{%endif%}
+{% if show_form%}
+<form method="post">
+    {%csrf_token%}
+    {{form}}
+    <button>update</button>
+    </form>
+{%endif%}
