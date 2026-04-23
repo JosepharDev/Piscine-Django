@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Movies
 from django.http import HttpResponse
+from .forms import MovieForm
 # Create your views here.
 def populate(request):
     try:
@@ -26,7 +28,25 @@ def display(request):
             return HttpResponse("No data available")
         return render(request, "index_d.html", {"data": data})
     except Exception as e:
-        return HttpResponse(f"Error dd: {e}")
+        return HttpResponse("No data available")
 
 
 def remove(request):
+    log_message = None
+    try:
+        movies = Movies.objects.all()
+        if not movies.exists():
+            return render(request, 'delete_item.html', {"log_message": "No data available"})
+    except Exception:
+        return render(request, 'delete_item.html', {"log_message": "No data available"})
+
+    if request.method == "POST":
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            item = form.cleaned_data['item_to_delete']
+            item.delete()
+            messages.success(request, f"Successfully deleted: {item}")
+            return redirect("delete_item_view")
+    else:
+        form = MovieForm()
+    return render(request, 'delete_item.html', {"form": form,"show_form": True})

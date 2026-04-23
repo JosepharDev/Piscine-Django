@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Movie</title>
+</head>
+<body>
+
+    {% if no_data %}
+        <p>No data available</p>
+    {% else %}
+        <h2>Update Movie Opening Crawl</h2>
+
+        {% if message %}
+            <p><strong>{{ message }}</strong></p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div>
+                {{ form.item_to_update.label_tag }}<br>
+                {{ form.item_to_update }}
+            </div>
+            
+            <br>
+            
+            <div>
+                {{ form.new_crawl.label_tag }}<br>
+                {{ form.new_crawl }}
+            </div>
+
+            <br>
+            <button type="submit">Update Database</button>
+        </form>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>data</title>
+    </head>
+    <body>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>episode_nb</td>
+                    <td>title</td>
+                    <td>opening_crawl</td>
+                    <td>director</td>
+                    <td>producer</td>
+                    <td>release_date</td>
+                    <td>created</td>
+                    <td>updated</td>
+                </tr>
+            <thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item.1}}</td>
+                    <td>{{item.0}}</td>
+                    <td>{{item.2}}</td>
+                    <td>{{item.3}}</td>
+                    <td>{{item.4}}</td>
+                    <td>{{item.5}}</td>
+                    <td>{{item.6}}</td>
+                    <td>{{item.7}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        <table>
+    </body>
+</html>

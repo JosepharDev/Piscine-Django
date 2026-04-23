@@ -11,4 +11,4 @@ class Movies(models.Model):
     release_date = models.DateField(null=False)
 
     def __str__(self):
-        return  title
+        return  self.title

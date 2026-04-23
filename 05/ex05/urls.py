@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path("populate", views.populate),
     path("display", views.display),
+    path("remove", views.remove, name="delete_item_view")
     
 ]
