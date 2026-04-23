@@ -91,7 +91,6 @@
         <h2>Submit Text</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.non_field_errors }}
             <div>
                 {{ form.text_input.errors }}
                 {{ form.text_input.label_tag }}
