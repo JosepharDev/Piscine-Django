@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}LifeProTips{% endblock %}</title>
+</head>
+<body>
+
+    {% include "nav.html" %}
+    <h1>Welcome to LifeProTips</h1>
+    {% block content %} 
+    {% endblock %}
+    <script>
+    function refreshUsername() {
+        fetch('getname')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('username').innerText = data.username;
+            });}
+    setInterval(refreshUsername, 2000);
+</script>
+</body>
+</html>

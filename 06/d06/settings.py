@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 USERNAME = ['qq', 'ww', 'ee', 'rr', 'tt', 'yy', 'uu', 'ii', 'oo', 'pp']
 NAME_VALIDITY_SECONDS = 42
 # Application definition
-
+AUTH_USER_MODEL = "ex.User"
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
