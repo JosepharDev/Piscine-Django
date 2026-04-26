@@ -27,3 +27,7 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match")
 
         return cleaned_data
+
+class TipForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea, label="Tip")
+    
