@@ -5,5 +5,5 @@ urlpatterns = [
     path("init", views.init),
     path("populate", views.populate),
     path("display", views.display),
-    path("update", views.update)
+    path("update", views.update, name="update"),
 ]

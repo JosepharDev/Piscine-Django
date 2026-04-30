@@ -18,7 +18,7 @@ def populate(request):
         objs = Movies.objects.bulk_create(movies)
         return HttpResponse("OK")
     except Exception as e:
-        return HttpResponse("No data available")
+        return HttpResponse(f"Error: {e}")
 
 def display(request):
     try:

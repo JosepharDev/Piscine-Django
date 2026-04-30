@@ -31,7 +31,7 @@ def populate(request):
         (3, "Revenge of the Sith", "George Lucas", "Rick McCallum", "2005-05-19"),
         (4, "A New Hope", "George Lucas", "Gary Kurtz, Rick McCallum", "1977-05-25"),
         (5, "The Empire Strikes Back", "Irvin Kershner", "Gary Kurtz, Rick McCallum", "1980-05-17"),
-        (6, "Return of the Jedi", " Richard Marquand", "Howard G. Kazanjian, George Lucas, Rick McCallum", "1983-05-25"),
+        (6, "Return of the Jedi", "Richard Marquand", "Howard G. Kazanjian, George Lucas, Rick McCallum", "1983-05-25"),
         (7, "The Force Awakens", "J. J. Abrams", "Kathleen Kennedy, J. J. Abrams, Bryan Burk", "2015-12-11")
     ]
     try: 
@@ -41,7 +41,15 @@ def populate(request):
                             host="localhost",
                             port="5432")
         cur = conn.cursor()
-        cur.executemany("insert into ex04_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)", data)
+        # UPSERT (insert + update)
+        cur.executemany("""
+                        insert into ex04_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)
+                        ON CONFLICT (episode_nb)
+                        DO UPDATE SET
+                            title = EXCLUDED.title,
+                            director = EXCLUDED.director,
+                            producer = EXCLUDED.producer,
+                            release_date = EXCLUDED.release_date""", data)
         conn.commit()
         return HttpResponse("OK")
 
@@ -68,7 +76,7 @@ def display(request):
             return HttpResponse("No data available")
         return render(request, "ex04_index.html", {"data":data})
     except Exception as e:
-        return HttpResponse(f"Error: {e}")
+        return HttpResponse("No data available")
 
     finally:
         if cur:
@@ -100,7 +108,7 @@ def remove(request):
         return render(request, 'ex04_remove.html', {"movies": movies})
 
     except Exception as e:
-        return HttpResponse(f"Error: {e}")
+        return HttpResponse( "No data available")
 
     finally:
         if cur:

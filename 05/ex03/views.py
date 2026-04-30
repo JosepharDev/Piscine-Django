@@ -26,4 +26,4 @@ def display(request):
             return HttpResponse("No data available")
         return render(request, "index_d.html", {"data": data})
     except Exception as e:
-        return HttpResponse(f"Error dd: {e}")
+        return HttpResponse("No data available")

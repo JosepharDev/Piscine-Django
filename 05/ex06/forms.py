@@ -11,4 +11,6 @@ class Update_crawl(forms.Form):
     )
     def __init__(self, movie_choices, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['item_to_update'].choices = [("", "--- Select a Movie ---")] + movie_choices
+        self.fields['item_to_update'].choices = [("", "--- Select a Movie ---")] + [
+            (title, title) for title in movie_choices
+        ]
