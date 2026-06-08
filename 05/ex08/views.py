@@ -4,8 +4,8 @@ import psycopg2
 from io import StringIO
 # Create your views here.
 
-CSV_PATH_PEOPLE = "/home/yoyahya/Desktop/Piscine-Django/05/d05_data/people.csv"
-CSV_PATH_PLANETS = "/home/yoyahya/Desktop/Piscine-Django/05/d05_data/planets.csv"
+CSV_PATH_PEOPLE = "/home/yoyahya/Desktop/Piscine-Django/05/data/people.csv"
+CSV_PATH_PLANETS = "/home/yoyahya/Desktop/Piscine-Django/05/data/planets.csv"
 def connect_db():
     conn = psycopg2.connect(
             dbname="djangotraining",
@@ -62,25 +62,23 @@ def populate(request):
         # POPULATE PLANETS
         # -------------------
         try:
-            buffer_planets = open(CSV_PATH_PLANETS, "r")
-            cur.copy_from(
-                buffer_planets,
-                "ex08_planets",
-                sep="\t",
-                columns=(
-                    "name",
-                    "climate",
-                    "diameter",
-                    "orUtapaubital_period",
-                    "population",
-                    "rotation_period",
-                    "surface_water",
-                    "terrain",
-                ),
-                null="NULL",
-            )
-            buffer_planets.close()
-
+            with open(CSV_PATH_PLANETS, 'r') as f: 
+                cur.copy_from(
+                    f,
+                    "ex08_planets",
+                    sep="\t",
+                    columns=(
+                        "name",
+                        "climate",
+                        "diameter",
+                        "orbital_period",
+                        "population",
+                        "rotation_period",
+                        "surface_water",
+                        "terrain",
+                    ),
+                    null="NULL",
+                )
             results.append("planets: OK")
 
         except Exception as e:
@@ -90,14 +88,13 @@ def populate(request):
         # POPULATE PEOPLE
         # -------------------
         try:
-           buffer_people = open(CSV_PATH_PEOPLE, "r")
-           cur.copy_from(
-               buffer_people,
-               "ex08_people",
-               sep="\t",
-               columns=("name", "birth_year", "gender","eye_color", "hair_color", "height", "mass", "homeworld"),null="NULL",
-            )
-           buffer_people.close()
+           with open(CSV_PATH_PEOPLE, "r") as f:
+               cur.copy_from(
+                   f,
+                   "ex08_people",
+                   sep="\t",
+                   columns=("name", "birth_year", "gender","eye_color", "hair_color", "height", "mass", "homeworld"),null="NULL",
+                )
            results.append("people: OK")
 
         except Exception as e:
@@ -133,4 +130,4 @@ def display(request):
         result = cur.fetchall()
         return render(request, "display_08.html", {"result": result})
     except Exception as e:
-        return HttpResponse(f"Error: {e}")
+        return HttpResponse("No data available")

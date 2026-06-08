@@ -41,7 +41,6 @@ def populate(request):
                             host="localhost",
                             port="5432")
         cur = conn.cursor()
-        # UPSERT (insert + update)
         cur.executemany("""
                         insert into ex04_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)
                         ON CONFLICT (episode_nb)

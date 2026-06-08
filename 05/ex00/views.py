@@ -23,4 +23,3 @@ def init(request):
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
-    

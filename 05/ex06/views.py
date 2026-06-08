@@ -2,6 +2,7 @@ from django.shortcuts import render
 import psycopg2
 from django.http import HttpResponse
 from .forms import Update_crawl
+from psycopg2 import errors
 
 def init(request):
     try:
@@ -34,13 +35,15 @@ def init(request):
             $$ language 'plpgsql';
         """)
 
-        cur.execute("""
-            CREATE TRIGGER update_films_changetimestamp
-            BEFORE UPDATE ON ex06_movies
-            FOR EACH ROW
-            EXECUTE PROCEDURE update_changetimestamp_column();
-        """)
-
+        try:
+            cur.execute("""
+                CREATE TRIGGER update_films_changetimestamp
+                BEFORE UPDATE ON ex06_movies
+                FOR EACH ROW
+                EXECUTE PROCEDURE update_changetimestamp_column();
+            """)
+        except errors.DuplicateObject:
+            return HttpResponse("Trigger already exist!")
         conn.commit()
         conn.close()
         cur.close()
