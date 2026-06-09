@@ -45,7 +45,6 @@ class Movies(models.Model):
     producer = models.CharField(max_length=128, null=False)
     release_date = models.DateField(null=False)
     characters = models.ManyToManyField(People, related_name="movies")
-    planets = models.ManyToManyField(Planets, related_name="movies")
 
     def __str__(self):
         return  self.title

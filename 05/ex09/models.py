@@ -26,7 +26,8 @@ class People(models.Model):
     hair_color = models.CharField(max_length=32, null=True, blank=True)
     height = models.IntegerField(null=True, blank=True)
     mass = models.IntegerField(null=True, blank=True)
-    homeworld = models.ForeignKey(Planets, on_delete=models.CASCADE, to_field="name", null=True, blank=True)
+    # homeworld = models.ForeignKey(Planets, on_delete=models.CASCADE, to_field="name", null=True, blank=True)
+    homeworld = models.ForeignKey(Planets, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
