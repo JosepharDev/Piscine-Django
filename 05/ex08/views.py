@@ -42,11 +42,14 @@ def init(request):
         mass real,
         homeworld varchar(64) references ex08_planets(name));""")
         conn.commit()
-        cur.close()
-        conn.close()
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 def populate(request):
     conn = None
@@ -131,3 +134,8 @@ def display(request):
         return render(request, "display_08.html", {"result": result})
     except Exception as e:
         return HttpResponse("No data available")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()

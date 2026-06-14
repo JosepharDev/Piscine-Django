@@ -45,11 +45,14 @@ def init(request):
         except errors.DuplicateObject:
             return HttpResponse("Trigger already exist!")
         conn.commit()
-        conn.close()
-        cur.close()
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 def populate(request):
     data = [
@@ -144,7 +147,9 @@ def update(request):
             form = Update_crawl(movie_choices)
 
     finally:
-        cur.close()
-        conn.close()
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
     
     return render(request, 'update_crawl.html', {'form': form, 'message': message})

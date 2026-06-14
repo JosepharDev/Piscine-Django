@@ -1,3 +1,4 @@
+from sqlalchemy.util.typing import final
 from django.shortcuts import render
 import psycopg2
 from django.http import HttpResponse
@@ -18,11 +19,14 @@ def init(request):
             producer varchar(128) not null,
             release_date date not null);""")
         conn.commit()
-        conn.close()
-        cur.close()
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 
 def populate(request):
@@ -45,10 +49,8 @@ def populate(request):
         cur.executemany("insert into ex02_movies (episode_nb, title, director, producer, release_date) values (%s,%s,%s,%s,%s)", data)
         conn.commit()
         return HttpResponse("OK")
-
     except Exception as e:
         return HttpResponse(f"Error: {e}")
-
     finally:
         if cur:
             cur.close()

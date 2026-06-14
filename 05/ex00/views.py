@@ -18,8 +18,11 @@ def init(request):
             producer varchar(128) not null,
             release_date date not null);""")
         conn.commit()
-        conn.close()
-        cur.close()
         return HttpResponse("OK")
     except Exception as e:
         return HttpResponse(f"Error: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
